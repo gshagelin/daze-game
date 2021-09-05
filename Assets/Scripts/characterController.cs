@@ -81,6 +81,8 @@ public class characterController : MonoBehaviour
 		}
 		if (isCrouching == true)
 		{ 
+			GetComponent<CharacterController>().height = 0.025f;
+			GetComponent<CharacterController>().center = new Vector3(0f,0f,-0.002f);
 			speed = crouchingMovementSpeed;
 			t2 = 0f;
 			t += Time.deltaTime;
@@ -88,6 +90,8 @@ public class characterController : MonoBehaviour
 			Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y, Mathf.SmoothStep(currentPosZ2, 0.0016f, (t / crouchSpeed)));	
 		} else if (isCrouching == false && Camera.transform.localPosition.z < 0.0066f)
 		{
+			GetComponent<CharacterController>().height = 0.033f;
+			GetComponent<CharacterController>().center = new Vector3(0f,0f,0f);
 			Debug.Log("ss");
 			speed = defaultSpeed;
 			currentPosZ2 = Camera.transform.localPosition.z;

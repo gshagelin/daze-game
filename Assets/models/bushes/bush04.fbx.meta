@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: f243a652e8fd37b609f9065fa1429ec6
+guid: a839827d9adc19974bae170042a7b588
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bush04
+    second: {fileID: 2100000, guid: a92ee766a235b614fb604f110ff506d1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -10,9 +10,11 @@ public class camera : MonoBehaviour
 	private float pitch = 0f;
 	public bool fullScreen;
 	public int refreshRate;
+	public int startingAngle;
 
 	private void Start () {
 		Screen.SetResolution(640, 360, fullScreen, refreshRate);
+		yaw = startingAngle;
 	}
 	private void Update()
 	{

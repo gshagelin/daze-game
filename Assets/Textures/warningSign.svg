@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="warningSign.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.64693624"
+     inkscape:cx="527.87273"
+     inkscape:cy="513.18813"
+     inkscape:window-width="2560"
+     inkscape:window-height="1369"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer2" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#ffed02;fill-opacity:1;stroke:#000000;stroke-width:4.265;stroke-dasharray:none;stroke-opacity:1"
+       id="rect234"
+       width="162.5258"
+       height="101.50632"
+       x="25.738073"
+       y="80.395325"
+       ry="13.680255"
+       rx="15.99379" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Layer 3">
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:4.32653;stroke-dasharray:none;stroke-opacity:1"
+       id="rect5365"
+       width="161.65823"
+       height="28.340796"
+       x="26.60565"
+       y="87.046745"
+       rx="0"
+       ry="0" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:3.83506;stroke-dasharray:none;stroke-opacity:1"
+       id="rect5365-6"
+       width="161.65823"
+       height="22.267767"
+       x="26.461048"
+       y="81.552094"
+       rx="0"
+       ry="10.700097" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer 2">
+    <text
+       xml:space="preserve"
+       style="font-size:22.0155px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#ffed02;fill-opacity:1;stroke:#000000;stroke-width:7.39341;stroke-dasharray:none;stroke-opacity:1"
+       x="52.922104"
+       y="105.06966"
+       id="text4485"><tspan
+         sodipodi:role="line"
+         id="tspan4483"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.0155px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#ffed02;fill-opacity:1;stroke:none;stroke-width:7.39341"
+         x="52.922104"
+         y="105.06966">WARNING</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:19.2649px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:6.46967;stroke-dasharray:none;stroke-opacity:1"
+       x="107.68471"
+       y="139.71754"
+       id="text4485-3"><tspan
+         sodipodi:role="line"
+         id="tspan4483-6"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:19.2649px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:6.46967"
+         x="107.68471"
+         y="139.71754">AUTOMATIC</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:19.2649px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:6.46967"
+         x="107.68471"
+         y="164.2274"
+         id="tspan14144">GATE OPENING</tspan></text>
+  </g>
+</svg>

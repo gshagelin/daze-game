@@ -42,10 +42,13 @@ public class characterController : MonoBehaviour
 	public GameObject light;
 	private float c;
 	private bool active;
+
+	public Animator armsAnim;
+
 	private void Start()
 	{
 		charControl = GetComponent<CharacterController>();
-		Camera = GameObject.Find("PlayerCamera");
+		Camera = GameObject.Find("SK_FP_arms");
 	}
 	private void Update () {
 		if (holdCrouch == true)
@@ -92,7 +95,6 @@ public class characterController : MonoBehaviour
 		{
 			GetComponent<CharacterController>().height = 0.033f;
 			GetComponent<CharacterController>().center = new Vector3(0f,0f,0f);
-			Debug.Log("ss");
 			speed = defaultSpeed;
 			currentPosZ2 = Camera.transform.localPosition.z;
 			t = 0f;
@@ -133,13 +135,11 @@ public class characterController : MonoBehaviour
 		    if (staminaTimer <= 0f && isCrouching == false) {
 			staminaBool = false;
 			staminaReset = false;
-			Debug.Log("s2");
 			speed = defaultSpeed;			
 		} else if (staminaTimer >= stamina) {
 			staminaBool = true;
 			staminaReset = true;
 			speed = 3f;
-			Debug.Log("ww");
 		}
 		c += Time.deltaTime;
 		if (Input.GetAxis("Light") == 1) {
@@ -152,12 +152,17 @@ public class characterController : MonoBehaviour
 			}
  			light.SetActive(active);
 		}
-		
 	}
 
 	private void FixedUpdate()
 	{
 		Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
+		if ((move.x >= 0.7 || move.x <= -0.7 || move.z >= 0.7 || move.z <= -0.7) && Input.GetAxis("Crouch") == 0) {
+			armsAnim.SetBool("isWalking", true);
+		} else {
+			armsAnim.SetBool("isWalking", false);
+		}
 		move = Camera.transform.TransformDirection(move);
 		charControl.Move(move * speed * Time.deltaTime);
 		velocity.y += gravity * Time.deltaTime;

@@ -51,6 +51,7 @@ public class characterController : MonoBehaviour
 		Camera = GameObject.Find("SK_FP_arms");
 	}
 	private void Update () {
+		Cursor.lockState = CursorLockMode.Locked;
 		if (holdCrouch == true)
 		{
 			if (Input.GetAxis("Crouch") == 1) {
@@ -167,5 +168,6 @@ public class characterController : MonoBehaviour
 		charControl.Move(move * speed * Time.deltaTime);
 		velocity.y += gravity * Time.deltaTime;
 		charControl.Move(velocity * Time.deltaTime);
+
 	}
 }

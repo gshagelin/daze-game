@@ -51,5 +51,4 @@ public class gunController : MonoBehaviour
             return false;
         }
     }
-
 }

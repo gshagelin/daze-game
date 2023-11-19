@@ -38,12 +38,15 @@ public class enemyController : MonitoredBehaviour
         private float defaultAgentStop;
         [Monitor]
         private bool hasCheckedLastPos = false;
+        public float rotSpeed = 0.001f;
+        private bool rotatePlayer;
+        public float rotateTimer = 0f;
 
         void Start () {
             activeMode = "idle";
             agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
             defaultAgentStop = agent.stoppingDistance;
-
+            rotatePlayer = true;
         }
         void Update () {
             RaycastHit hit;
@@ -70,8 +73,25 @@ public class enemyController : MonitoredBehaviour
                         }
                     }
                 }
-            }
-        }
+            } 
+           /* if (rotatePlayer == true)  {
+                float max = Random.Range(45f, 180f);
+                float min = Random.Range(-45f, -180f);
+
+                Quaternion currentRot = transform.rotation;
+                Vector3 minRot = new Vector3(currentRot.x, currentRot.y + min, currentRot.z);
+                Debug.Log("df");
+               // while (rotateTimer < max) {
+                    rotateTimer += Time.deltaTime * rotSpeed;
+
+                    Debug.Log(rotateTimer);
+                transform.Rotate(new Vector3 (0, max, 0));
+             //   }
+                if (rotateTimer > max) {
+                    rotatePlayer = false;
+                }
+            } */
+        } 
 
         void chaseState () {
             agent.stoppingDistance = defaultAgentStop;
@@ -85,7 +105,6 @@ public class enemyController : MonitoredBehaviour
             gameObject.transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, (player.transform.position - transform.position), maxRotationSpeed * Time.deltaTime, 0f));
             hasCheckedLastPos = false;
         }
-
         void attackingPlayer () {
             Debug.Log("attacking");
         }
@@ -98,6 +117,7 @@ public class enemyController : MonitoredBehaviour
     	    lastKnownPos = player.transform.position;
             huntPos();
             hasCheckedLastPos = true;
+            rotate();
         }
         IEnumerator huntPos () {                                 
             while ((player.transform.position - transform.position).magnitude > 3f) {
@@ -111,4 +131,8 @@ public class enemyController : MonitoredBehaviour
                 return;
             }
         }
+        void rotate () {
+       
+        
+    }
 }

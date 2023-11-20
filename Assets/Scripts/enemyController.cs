@@ -31,7 +31,7 @@ public class enemyController : MonitoredBehaviour
         [Monitor]
         private string activeMode;
         [Monitor]
-        private float extendedChaseTimer = 3f;
+        private float extendedChaseTimer = 1.5f;
         private bool canExtendChase = false;
 
         private UnityEngine.AI.NavMeshAgent agent;
@@ -41,13 +41,15 @@ public class enemyController : MonitoredBehaviour
         public float rotSpeed = 0.001f;
         private bool rotatePlayer;
         public float rotateTimer = 0f;
+        private bool randHunt = false;
 
         void Start () {
             activeMode = "idle";
             agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
             defaultAgentStop = agent.stoppingDistance;
             rotatePlayer = true;
-        }
+        }  
+        private Vector3 pos;
         void Update () {
             RaycastHit hit;
             rayDirection = pointOfSight.transform.position - enemyVision.transform.position;
@@ -55,7 +57,7 @@ public class enemyController : MonitoredBehaviour
                 float dotProduct = Vector3.Dot((player.transform.position - enemyVision.transform.position).normalized, enemyVision.transform.forward.normalized);
                 if (dotProduct >= 0.5f) {
                     Debug.DrawRay(enemyVision.transform.position, rayDirection * 10, Color.green);
-                    extendedChaseTimer = 3f;
+                    extendedChaseTimer = 1.5f;
                     chaseState();
                 } else {
                     Debug.DrawRay(enemyVision.transform.position, rayDirection * 10, Color.red);
@@ -66,14 +68,22 @@ public class enemyController : MonitoredBehaviour
                     if (extendedChaseTimer >= 0f) {
                         chaseState();
                     } else {
-                        Debug.Log("what");
                         canExtendChase = false;
                         if (hasCheckedLastPos == false) {
                             huntState ();
+                        } else {
+                            Debug.Log("end");
+                            randHunt = true;
                         }
                     }
                 }
             } 
+            if (randHunt == true) {
+                activeMode = "randHunt";
+                
+                IEnumerator coroutine = repeatedHunt();
+                StartCoroutine(coroutine);
+            }
            /* if (rotatePlayer == true)  {
                 float max = Random.Range(45f, 180f);
                 float min = Random.Range(-45f, -180f);
@@ -81,7 +91,7 @@ public class enemyController : MonitoredBehaviour
                 Quaternion currentRot = transform.rotation;
                 Vector3 minRot = new Vector3(currentRot.x, currentRot.y + min, currentRot.z);
                 Debug.Log("df");
-               // while (rotateTimer < max) {
+               // 'while (rotateTimer < max) {
                     rotateTimer += Time.deltaTime * rotSpeed;
 
                     Debug.Log(rotateTimer);
@@ -91,9 +101,17 @@ public class enemyController : MonitoredBehaviour
                     rotatePlayer = false;
                 }
             } */
+            if ((lastKnownPos - transform.position).magnitude <= 3f) {
+                hasCheckedLastPos = true;
+                pos = randomPos();
+                Instantiate(posObj, pos, Quaternion.identity);
+                randHunt = true;
+                lastKnownPos = new Vector3(1000, 1000, 1000);
+            }
         } 
 
         void chaseState () {
+            randHunt = false;
             agent.stoppingDistance = defaultAgentStop;
             canExtendChase = true;
             activeMode = "chase";
@@ -115,14 +133,28 @@ public class enemyController : MonitoredBehaviour
             agent.speed = walkSpeed;
             activeMode = "hunt";
     	    lastKnownPos = player.transform.position;
-            huntPos();
-            hasCheckedLastPos = true;
-            rotate();
+            IEnumerator coroutine = huntPos();
+            StartCoroutine(coroutine);
         }
-        IEnumerator huntPos () {                                 
-            while ((player.transform.position - transform.position).magnitude > 3f) {
+        IEnumerator huntPos () {          
+            while ((player.transform.position - transform.position).magnitude > 3f) {   
                 agent.destination = lastKnownPos;
                 yield return null;
+            }
+        }
+        public GameObject posObj;
+        IEnumerator repeatedHunt () {
+             if ((pos - transform.position).magnitude <= 0.5f) {
+                yield return new WaitForSeconds(3);
+                Debug.Log("changing pos");
+                pos = randomPos(); 
+                Instantiate(posObj, pos, Quaternion.identity);
+            } 
+
+            while ((pos - transform.position).magnitude > 0.5f) {
+                agent.destination = pos;
+                yield return null;
+                Debug.Log("moving ");
             }
         }
         void delay (float delay) {
@@ -131,8 +163,9 @@ public class enemyController : MonitoredBehaviour
                 return;
             }
         }
-        void rotate () {
-       
-        
-    }
+        Vector3 randomPos () {
+            Vector2 pos2 = (Random.insideUnitCircle * 20f);
+            Vector3 pos3 = new Vector3(pos2.x + transform.position.x, transform.position.y, pos2.y + transform.position.z);
+            return pos3;
+        }
 }

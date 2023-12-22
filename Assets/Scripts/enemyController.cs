@@ -101,7 +101,7 @@ public class enemyController : MonitoredBehaviour
                     rotatePlayer = false;
                 }
             } */
-            if ((lastKnownPos - transform.position).magnitude <= 3f) {
+            if ((lastKnownPos - transform.position).magnitude <= 2f) {
                 hasCheckedLastPos = true;
                 pos = randomPos();
                 Instantiate(posObj, pos, Quaternion.identity);
@@ -137,7 +137,7 @@ public class enemyController : MonitoredBehaviour
             StartCoroutine(coroutine);
         }
         IEnumerator huntPos () {          
-            while ((player.transform.position - transform.position).magnitude > 3f) {   
+            while ((player.transform.position - transform.position).magnitude > 2f) {   
                 agent.destination = lastKnownPos;
                 yield return null;
             }

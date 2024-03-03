@@ -45,6 +45,9 @@ public class characterController : MonoBehaviour
 
 	public Animator armsAnim;
 
+	[SerializeField]
+	private float playerHealth;
+
 	private void Start()
 	{
 		charControl = GetComponent<CharacterController>();
@@ -169,5 +172,8 @@ public class characterController : MonoBehaviour
 		velocity.y += gravity * Time.deltaTime;
 		charControl.Move(velocity * Time.deltaTime);
 
+	}
+	public void attacked() {
+					
 	}
 }

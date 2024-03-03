@@ -11,6 +11,9 @@ public class gunController : MonoBehaviour
 
     public Animator armsAnim;
     private Animator gunAnim;
+    public GameObject ammoTotalUI;
+    public GameObject AmmoMagUI;
+
 
     void Start () {
         gunAnim = gameObject.GetComponent<Animator>();
@@ -25,6 +28,7 @@ public class gunController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && (currentBullets - currentBulletsMag) > 0 && isAnimPlaying() == false) {
             gunReload();
         }
+        ammoTotalUI.GetComponents
     }
     
     void gunFire () {

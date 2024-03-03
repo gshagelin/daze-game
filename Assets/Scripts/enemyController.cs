@@ -42,6 +42,7 @@ public class enemyController : MonitoredBehaviour
         private bool rotatePlayer;
         public float rotateTimer = 0f;
         private bool randHunt = false;
+        private bool canMove = true;
 
         void Start () {
             activeMode = "idle";
@@ -53,7 +54,7 @@ public class enemyController : MonitoredBehaviour
         void Update () {
             RaycastHit hit;
             rayDirection = pointOfSight.transform.position - enemyVision.transform.position;
-            if (Physics.Raycast(enemyVision.transform.position, rayDirection, out hit, visionDistance) && hit.collider.gameObject.name == "playerManager") {
+            if (Physics.Raycast(enemyVision.transform.position, rayDirection, out hit, visionDistance) && hit.collider.gameObject.name == "playerManager" && canMove == true) {
                 float dotProduct = Vector3.Dot((player.transform.position - enemyVision.transform.position).normalized, enemyVision.transform.forward.normalized);
                 if (dotProduct >= 0.5f) {
                     Debug.DrawRay(enemyVision.transform.position, rayDirection * 10, Color.green);
@@ -136,8 +137,11 @@ public class enemyController : MonitoredBehaviour
             IEnumerator coroutine = huntPos();
             StartCoroutine(coroutine);
         }
+        void attack() {
+            player.GetComponent<characterController>().attacked();
+        }
         IEnumerator huntPos () {          
-            while ((player.transform.position - transform.position).magnitude > 2f) {   
+            while ((player.transform.position - transform.position).magnitude > 0f) {   
                 agent.destination = lastKnownPos;
                 yield return null;
             }
@@ -159,6 +163,7 @@ public class enemyController : MonitoredBehaviour
         }
         void delay (float delay) {
             float timer =+ Time.deltaTime;
+            Debug.Log(timer);
             if (timer >= delay) {
                 return;
             }
@@ -167,5 +172,10 @@ public class enemyController : MonitoredBehaviour
             Vector2 pos2 = (Random.insideUnitCircle * 20f);
             Vector3 pos3 = new Vector3(pos2.x + transform.position.x, transform.position.y, pos2.y + transform.position.z);
             return pos3;
+        }
+        void OnTriggerEnter (Collider trigger) {
+            if (trigger.gameObject == player) {
+                attack();
+            }
         }
 }

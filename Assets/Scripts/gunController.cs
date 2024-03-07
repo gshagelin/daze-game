@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class gunController : MonoBehaviour
 {
@@ -11,8 +12,8 @@ public class gunController : MonoBehaviour
 
     public Animator armsAnim;
     private Animator gunAnim;
-    public GameObject ammoTotalUI;
-    public GameObject AmmoMagUI;
+    public TMPro.TMP_Text ammoTotalUI;
+    public TMPro.TMP_Text ammoMagUI;
 
 
     void Start () {
@@ -28,7 +29,8 @@ public class gunController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && (currentBullets - currentBulletsMag) > 0 && isAnimPlaying() == false) {
             gunReload();
         }
-        ammoTotalUI.GetComponents
+        ammoTotalUI.text = (currentBullets-currentBulletsMag).ToString();
+        ammoMagUI.text = currentBulletsMag.ToString();
     }
     
     void gunFire () {

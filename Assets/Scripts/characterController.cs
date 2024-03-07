@@ -1,6 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
+
+using Baracuda.Monitoring;
+[MFontSize(12)]
 
 public class characterController : MonoBehaviour
 {
@@ -45,15 +49,29 @@ public class characterController : MonoBehaviour
 
 	public Animator armsAnim;
 
-	[SerializeField]
-	private float playerHealth;
-
+	[Monitor]
+	public float playerHealth;
+	public PostProcessVolume damageVignette; 
+	float vignetteEffect;
+	Vignette vignette;
 	private void Start()
 	{
+		playerHealth = 100f;
 		charControl = GetComponent<CharacterController>();
 		Camera = GameObject.Find("SK_FP_arms");
+
+		vignette = ScriptableObject.CreateInstance<Vignette>();
+		vignette.enabled.Override(true);
+		damageVignette = PostProcessManager.instance.QuickVolume(gameObject.layer, 100f, vignette);
 	}
 	private void Update () {
+		vignetteEffect = Mathf.Lerp(0.7f, 0.2f, (playerHealth*0.01f));
+		vignette.intensity.Override(vignetteEffect);
+
+		if (playerHealth <= 0) {
+			playerDeath();
+		}
+
 		Cursor.lockState = CursorLockMode.Locked;
 		if (holdCrouch == true)
 		{
@@ -174,6 +192,9 @@ public class characterController : MonoBehaviour
 
 	}
 	public void attacked() {
-					
+		playerHealth -= 34f;			
+	}
+	private void playerDeath () {
+		Debug.Log("rip");
 	}
 }

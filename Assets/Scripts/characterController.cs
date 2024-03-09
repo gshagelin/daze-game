@@ -54,6 +54,10 @@ public class characterController : MonoBehaviour
 	public PostProcessVolume damageVignette; 
 	float vignetteEffect;
 	Vignette vignette;
+
+	public Animator playerAnim;
+	public Animator deathImageAnim;
+
 	private void Start()
 	{
 		playerHealth = 100f;
@@ -195,6 +199,9 @@ public class characterController : MonoBehaviour
 		playerHealth -= 34f;			
 	}
 	private void playerDeath () {
-		Debug.Log("rip");
+		playerAnim.enabled = true;
+		deathImageAnim.enabled = true;
+		//deathImageAnim.SetBool("isPlayerDead", true);
+		//playerAnim.SetBool("deathCamera", true);
 	}
 }

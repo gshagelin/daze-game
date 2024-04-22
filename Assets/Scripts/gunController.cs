@@ -12,8 +12,8 @@ public class gunController : MonoBehaviour
 
     public Animator armsAnim;
     private Animator gunAnim;
-    public TMPro.TMP_Text ammoTotalUI;
-    public TMPro.TMP_Text ammoMagUI;
+    //public TMPro.TMP_Text ammoTotalUI;
+    //public TMPro.TMP_Text ammoMagUI;
 
 
     void Start () {
@@ -29,8 +29,8 @@ public class gunController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && (currentBullets - currentBulletsMag) > 0 && isAnimPlaying() == false) {
             gunReload();
         }
-        ammoTotalUI.text = (currentBullets-currentBulletsMag).ToString();
-        ammoMagUI.text = currentBulletsMag.ToString();
+       // ammoTotalUI.text = (currentBullets-currentBulletsMag).ToString();
+       // ammoMagUI.text = currentBulletsMag.ToString();
     }
     
     void gunFire () {

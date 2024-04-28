@@ -14,7 +14,7 @@ public class enemyController : MonitoredBehaviour
         //Investigates position where it last saw/heard the player. Begins walking around the area afterwards. 
         //After a selected period of time in the hunt period, it will call reinforcements.
         //Reinforce: After existing enemy in hunt phase has called reinforcement. Spawns new enemies that marches to location
-        //where reinforcements where called from. Will enter hunt or chase phase if player is seen or heard along the way. 
+        //where reinforcements were called from. Will enter hunt or chase phase if player is seen or heard along the way. 
 
         public GameObject enemyVision;
         public GameObject pointOfSight;
@@ -139,6 +139,7 @@ public class enemyController : MonitoredBehaviour
         }
         void attack() {
             player.GetComponent<characterController>().attacked();
+            isAttacking = false;
         }
         IEnumerator huntPos () {          
             while ((player.transform.position - transform.position).magnitude > 0f) {   
@@ -173,9 +174,19 @@ public class enemyController : MonitoredBehaviour
             Vector3 pos3 = new Vector3(pos2.x + transform.position.x, transform.position.y, pos2.y + transform.position.z);
             return pos3;
         }
-        void OnTriggerEnter (Collider trigger) {
+
+        private bool isAttacking;
+        void OnTriggerStay (Collider trigger) {
             if (trigger.gameObject == player) {
-                attack();
+                if (isAttacking == false) {
+                    StartCoroutine(attackDelay());
+                }
+                isAttacking = true;
             }
+        }
+
+        private IEnumerator attackDelay () {
+            yield return new WaitForSeconds(2f);
+            attack();
         }
 }
